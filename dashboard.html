@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>DASHBOARD</title>
+    <link rel="stylesheet" href="css/bootstrap1.min.css" />
+    <link rel="stylesheet" href="css/style1.css" />
+    <style>
+        .glow-button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+            text-decoration: none;
+            color: #ffffff;
+            background-color: #434561;
+            border: none;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+            transition: box-shadow 0.3s ease-in-out;
+            margin: 10px;
+        }
+        
+        .glow-button:hover {
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+        }
+        
+        .glow-button:focus {
+            outline: none;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+        }
+        
+        .glow-button:active {
+            transform: translateY(2px);
+            box-shadow: 0 0 10px blue;
+        }
+
+        .single_quick_activity {
+            cursor: pointer;
+            transition: box-shadow 0.3s ease-in-out;
+            margin: 10px;
+        }
+
+        .single_quick_activity.mobiles:hover,
+        .single_quick_activity.mobiles:focus {
+            box-shadow: 0 0 10px blue;
+        }
+
+        .single_quick_activity.accessories:hover,
+        .single_quick_activity.accessories:focus {
+            box-shadow: 0 0 10px red;
+        }
+
+        .single_quick_activity.cover:hover,
+        .single_quick_activity.cover:focus {
+            box-shadow: 0 0 10px purple;
+        }
+
+        .single_quick_activity.report:hover,
+        .single_quick_activity.report:focus {
+            box-shadow: 0 0 10px yellow;
+        }
+
+        .single_quick_activity.expense:hover,
+        .single_quick_activity.expense:focus {
+            box-shadow: 0 0 10px green;
+        }
+
+        .single_quick_activity.debt:hover,
+        .single_quick_activity.debt:focus {
+            box-shadow: 0 0 10px black;
+        }
+
+        .single_quick_activity.debtreport:hover,
+        .single_quick_activity.debtreport:focus {
+            box-shadow: 0 0 10px black;
+        }
+
+        .footer-download-button {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            height: 50px;
+        }
+
+        .footer-download-button a {
+            display: inline-block;
+            padding: 8px 10px;
+            font-size: 15px;
+            font-weight: bold;
+            text-align: center;
+            text-decoration: none;
+            color: #ffffff;
+            background-color: #434561;
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+            transition: box-shadow 0.3s ease-in-out;
+            margin-left: 10px;
+        }
+
+        .footer-download-button a:hover {
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+        }
+
+        .footer-download-button a:focus {
+            outline: none;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+        }
+
+        .footer-download-button a:active {
+            transform: translateY(2px);
+            box-shadow: 0 0 10px blue;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-logo">
+   
+<h2 style="color:#434561;">STOCKWISE</h2>
+        </div>
+        <div class="header-text">
+            <h3 style="margin-left:-60px;">J.COM</h3>
+        </div>
+        <div class="footer_iner">
+            <button class="glow-button" style="margin-left: 45px;" onclick="window.location.href='index.html'">Logout</button>
+        </div>
+    </header>
+
+    <div class="container-fluid g-0">
+        <div class="row">
+            <div class="col-lg-12 p-0">
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <center>
+            <h3 style="text-shadow: 2px 2px 5px #434561; font-size: 40px; margin-top: 30px;">Dashboard</h3>
+        </center>
+    </div>
+
+    <div class="rectangle-box">
+        <p style="font-size: 24px; margin-left: -3px; margin-top: 40px; color: #434561; display: flex;">WALLET</p>
+        <h3><span class="counter blue_color" id="expenseAmount" style="margin-top: -200px;">0</span></h3>
+    </div>
+
+    <br>
+
+    <div class="main_content_iner">
+        <div class="container-fluid p-0">
+            <div class="row justify-content-center">
+                <div class="col-lg-12">
+                    <div class="single_element">
+                        <div class="quick_activity">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="quick_activity_wrap quick_activity_wrap">
+                                        <div class="single_quick_activity mobiles d-flex" onclick="window.location.href='phone.html'">
+                                            <div class="count_content count_content2">
+                                                <h3><span class="counter blue_color">Mobiles</span></h3>
+                                                <p style="font-size: 24px; margin-left: 10px;">موبائلز</p>
+                                            </div>
+                                        </div>
+                                        <div class="single_quick_activity accessories d-flex" onclick="window.location.href='accessories.html'">
+                                            <div class="count_content count_content2">
+                                                <h3><span class="counter red_color">Accessories</span></h3>
+                                                <p style="font-size: 24px; margin-left: 10px;">لوازمات</p>
+                                            </div>
+                                        </div>
+                                        <div class="single_quick_activity cover d-flex" onclick="window.location.href='covers.html'">
+                                            <div class="count_content count_content2">
+                                                <h3><span class="counter purple_color">Cover</span></h3>
+                                                <p style="font-size: 24px; margin-left: 10px;">ڈھانپنا</p>
+                                            </div>
+                                        </div>
+                                        <div class="single_quick_activity report d-flex" onclick="window.location.href='report.html'">
+                                            <div class="count_content count_content2">
+                                                <h3><span class="counter yellow_color">Report</span></h3>
+                                                <p style="font-size: 24px; margin-left: 10px;">رپورٹ</p>
+                                            </div>
+                                        </div>
+                                        <div class="single_quick_activity expense d-flex" onclick="window.location.href='expense.html'">
+                                            <div class="count_content count_content2">
+                                                <h3><span class="counter green_color">Expense</span></h3>
+                                                <p style="font-size: 24px; margin-left: 10px;">خرچہ</p>
+                                            </div>
+                                        </div>
+                                        <div class="single_quick_activity debt d-flex" onclick="window.location.href='debt.html'">
+                                            <div class="count_content count_content2">
+                                                <h3><span class="counter black_color">Debt</span></h3>
+                                                <p style="font-size: 24px; margin-left: 10px;">ادهار</p>
+                                            </div>
+                                        </div>
+                                        <div class="single_quick_activity debtreport d-flex" onclick="window.location.href='deptreport.html'">
+                                            <div class="count_content count_content2">
+                                                <h3><span class="counter grey_color">Debt Report</span></h3>
+                                                <p style="font-size: 24px; margin-left: 10px;">ادهار رپورٹ</p>
+                                            </div>
+                                        </div>
+                                        <div class="single_quick_activity expense d-flex" onclick="window.location.href='payreport.html'">
+                                            <div class="count_content count_content2">
+                                                <h3><span class="counter green_color">Pay Report</span></h3>
+                                                <p style="font-size: 24px; margin-left: 10px;">خرچہ رپورٹ</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="footer_iner">
+                        <div class="footer-download-button">
+<h4 style="margin-left:50px; color:white;">Download STOCKWISE App</h4>
+                            <a href="apk/STOCKWISESHOP.apk" class="glow-button">Download</a>
+           
+          </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-database.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="js/showexpense.js"></script>
+</body>
+</html>

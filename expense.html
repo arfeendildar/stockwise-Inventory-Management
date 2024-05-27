@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>EXPENSE</title>
+    <link rel="stylesheet" href="css/bootstrap1.min.css" />
+    <link rel="stylesheet" href="css/style1.css" />
+    <link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+    <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="fonts/iconic/css/material-design-iconic-font.min.css">
+    <link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+    <link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
+    <link rel="stylesheet" type="text/css" href="vendor/animsition/css/animsition.min.css">
+    <link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+    <link rel="stylesheet" type="text/css" href="vendor/daterangepicker/daterangepicker.css">
+    <link rel="stylesheet" type="text/css" href="css/util.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+</head>
+<body>
+
+<div class="limiter" style="margin-top:-20px;">
+    <header class="header" style="margin-top:20px;">
+         <div class="header-logo">
+   
+<h2 style="color:#434561;">STOCKWISE</h2>
+        </div>
+        <div class="header-text">
+            <h3 style="margin-left:-60px;">J.COM</h3>
+        </div>
+        <div class="footer_iner">
+            <button class="glow-button" style="margin-left: 40px; size:10px;"
+                    onclick="window.location.href='index.html'">Logout
+            </button>
+        </div>
+    </header>
+    <div class="container-login100" style="background-image: url('images/bg-01.jpg');">
+        <div class="wrap-login100" style="margin-top: -100px;">
+            <form class="login100-form validate-form">
+                <center>
+                    <p style="font-size: 24px; margin-left: 154px; margin-top: -10px; color: #434561; display: flex;">WALLET</p>
+                    <h3><span class="counter blue_color" style="margin-top: -200px;">0</span></h3>
+                </center>
+                <br><br>
+
+                <div class="wrap-input100 validate-input" data-validate="Amount">
+                    <input class="input100" type="text" name="amount" id="amount" placeholder="Amount">
+                    <span class="focus-input100" data-placeholder="&#xf215;"></span>
+
+                </div>
+
+                <div class="wrap-input100 validate-input" data-validate="Description">
+                    <input class="input100" type="text" name="description" id="description" placeholder="Description">
+                    <span class="focus-input100" data-placeholder="&#xf222;"></span>
+                </div>
+
+                <div class="container-login100-form-btn">
+                    <button type="button" class="login100-form-btn" id="submitBtn" onclick="submitForm()">SUBMIT</button>
+                </div>
+            </form>
+            <br>
+            <center>
+                <button class="login100-form-btn" style="margin-left: -1px;"
+                        onclick="window.location.href='dashboard.html'">BACK
+                </button>
+            </center>
+        </div>
+    </div>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-database.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- Include jQuery library -->
+<script>
+    var firebaseConfig = {
+    apiKey: "AIzaSyBc_W-aDeEt5H77RolsZGW7cgS9tllBjIw",
+    authDomain: "jcomrep-9cccf.firebaseapp.com",
+    databaseURL: "https://jcomrep-9cccf-default-rtdb.firebaseio.com",
+    projectId: "jcomrep-9cccf",
+    storageBucket: "jcomrep-9cccf.appspot.com",
+    messagingSenderId: "915085991049",
+    appId: "1:915085991049:web:7753c793487a601f9fba58",
+    measurementId: "G-72T68962SV"
+};
+
+
+    firebase.initializeApp(firebaseConfig);
+    var reportDatabase = firebase.database().ref("reportpay");
+    var expenseRef = firebase.database().ref("expense");
+
+    function submitForm() {
+        var amount = document.getElementById('amount').value;
+        var description = document.getElementById('description').value;
+
+        if (amount !== "" && description !== "") {
+            var entry = {
+                date: new Date().toLocaleString(),
+                add: 0,
+                take: 0,
+                description: description
+            };
+
+            if (amount > 0) {
+                entry.add = parseFloat(amount);
+            } else {
+                entry.take = parseFloat(amount);
+            }
+
+            reportDatabase.push(entry, function(error) {
+                if (error) {
+                    console.log("Failed to store the entry in the report database:", error);
+                } else {
+                    console.log("Entry stored in the report database:", entry);
+                }
+            });
+
+            // Update the expense value
+            expenseRef.transaction(function(currentExpense) {
+                if (currentExpense === null) {
+                    return parseFloat(amount);
+                } else {
+                    return currentExpense + parseFloat(amount);
+                }
+            });
+        }
+
+        // Reset the form
+        document.getElementById('amount').value = "";
+        document.getElementById('description').value = "";
+    }
+
+    // Listen for changes in the expense value
+    expenseRef.on('value', function(snapshot) {
+        var expense = snapshot.val() || 0;
+        document.querySelector('.counter.blue_color').textContent = 'Rs. ' + expense;
+    });
+</script>
+</body>
+</html>

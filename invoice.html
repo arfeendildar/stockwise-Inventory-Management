@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Invoice</title>
+  <style>
+    /* CSS styles for the invoice */
+    body {
+      font-family: Arial, sans-serif;
+    }
+    .invoice {
+      width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #fff;
+      border: 1px solid #ddd;
+    }
+    .invoice-header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .invoice-header h1 {
+      font-size: 24px;
+      margin: 0;
+    }
+    .invoice-header h3 {
+      margin: 0;
+    }
+    .invoice-date-time {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .invoice-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .invoice-table th,
+    .invoice-table td {
+      padding: 10px;
+      border-bottom: 1px solid #ddd;
+    }
+    .invoice-table th {
+      text-align: left;
+    }
+    .invoice-total {
+      text-align: right;
+      margin-top: 20px;
+      font-weight: bold;
+    }
+    .invoice-actions {
+      text-align: center;
+      margin-top: 20px;
+    }
+    .invoice-actions button {
+      padding: 10px 20px;
+      background-color: #4caf50;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      margin-right: 10px;
+    }
+    .invoice-actions button:last-child {
+      background-color: #4caf50;
+    }
+  </style>
+</head>
+<body>
+  <div class="invoice">
+    <div class="invoice-header">
+      <h3>J.COM</h3>
+      <h3>03185651225</h3>
+      <h3>MAIN STOP KHANPUR</h3>
+      <h1>Invoice</h1>
+    </div>
+    <div class="invoice-date-time">
+      <p id="date"></p>
+    </div>
+    <table class="invoice-table">
+      <thead>
+        <tr>
+          <th>IMEI NUMBER</th>
+          <th>ID CARD</th>
+          <th>NAME</th>
+          <th>BRAND</th>
+          <th>MODEL</th>
+          <th>SELLING</th>
+<th>ADDRESS</th>
+
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+    <div class="invoice-total">
+      Total: 
+    </div>
+    <div class="invoice-actions">
+      <button onclick="downloadInvoice()">Download Invoice</button>
+      <button onclick="printInvoice()">Print Invoice</button>
+      <button onclick="goBack()">Back</button>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js"></script>
+  <script src="js/invoice.js"></script>
+  <script>
+    function goBack() {
+      window.history.back();
+    }
+
+    function printInvoice() {
+      window.print();
+    }
+
+    function downloadInvoice() {
+      var doc = new jsPDF('p', 'pt', 'a4');
+      var table = document.querySelector('.invoice-table');
+      var rows = table.rows;
+      var columnWidths = [80, 80, 80, 80, 80, 80]; // Adjust the column widths as needed
+
+      doc.setFontSize(8); // Set font size for additional text
+
+      doc.text(getCurrentDateTime(), 30, 50); // Add the current date and time
+
+      var y = 80; // Start y-coordinate for the table
+      for (var i = 0; i < rows.length; i++) {
+        var cells = rows[i].cells;
+        var x = 40; // Start x-coordinate for the table
+        for (var j = 0; j < cells.length; j++) {
+          var cell = cells[j];
+          var width = columnWidths[j];
+          var height = 20;
+          doc.text(x, y, cell.innerText);
+          x += width;
+        }
+        y += height;
+      }
+
+      doc.save('invoice.pdf');
+    }
+
+    function getCurrentDateTime() {
+      var currentDate = new Date();
+      var date = currentDate.toLocaleDateString();
+      var time = currentDate.toLocaleTimeString();
+      return date + ' ' + time;
+    }
+
+    window.addEventListener('DOMContentLoaded', function() {
+      var invoiceData = localStorage.getItem('invoiceData');
+      if (invoiceData) {
+        invoiceData = JSON.parse(invoiceData);
+
+        var dateDiv = document.getElementById('date');
+        dateDiv.innerText = getCurrentDateTime();
+
+        var table = document.querySelector('.invoice-table tbody');
+        var row = document.createElement('tr');
+        var imeiCell = document.createElement('td');
+        imeiCell.innerText = invoiceData.imei;
+        var idCardCell = document.createElement('td');
+        idCardCell.innerText = invoiceData.customerID;
+        var nameCell = document.createElement('td');
+        nameCell.innerText = invoiceData.customerName;
+        var brandCell = document.createElement('td');
+        brandCell.innerText = invoiceData.brand;
+        var modelCell = document.createElement('td');
+        modelCell.innerText = invoiceData.model;
+        var sellingPriceCell = document.createElement('td');
+        var addressCell = document.createElement('td');
+        
+        sellingPriceCell.innerText = invoiceData.sellPrice;
+        addressCell.innerText = invoiceData.customerAddress;
+
+        row.appendChild(imeiCell);
+        row.appendChild(idCardCell);
+        row.appendChild(nameCell);
+        row.appendChild(brandCell);
+        row.appendChild(modelCell);
+        row.appendChild(sellingPriceCell);
+        row.appendChild(addressCell);
+
+        table.appendChild(row);
+
+        var invoiceTotal = document.querySelector('.invoice-total');
+        invoiceTotal.innerText = 'Total: ' + invoiceData.sellPrice;
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>LOGIN</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-database.js"></script>
+
+    <style>
+        @media (min-width: 769px) {
+            .download-wrap {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .login-wrap {
+                display: none;
+            }
+
+            .download-wrap {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                height: 30vh;
+                background-color: white;
+            }
+
+            .download-wrap h2 {
+                font-size: 18px;
+                color: #888888;
+                margin-bottom: 10px;
+            }
+
+            .download-wrap h2 {
+                font-size: 24px;
+                margin-bottom: 20px;
+            }
+
+            .download-wrap a {
+                display: inline-block;
+                padding: 10px 20px;
+                font-size: 18px;
+                font-weight: bold;
+                text-align: center;
+                text-decoration: none;
+                color: #ffffff;
+                background-color: #434561;
+                border: none;
+                border-radius: 5px;
+                box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+                transition: box-shadow 0.3s ease-in-out;
+            }
+
+            .download-wrap a:hover {
+                box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+            }
+
+            .download-wrap a:focus {
+                outline: none;
+                box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+            }
+
+            .download-wrap a:active {
+                transform: translateY(2px);
+                box-shadow: 0 0 10px blue;
+            }
+
+            .heading-section {
+                display: none;
+            }
+            
+            .video-container {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.8);
+                z-index: 9999;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            
+            .video-container video {
+                width: 80%;
+                height: auto;
+            }
+            
+            .close-btn {
+                position: absolute;
+                top: 15px;
+                right: 15px;
+                font-size: 24px;
+                color: #fff;
+                cursor: pointer;
+            }
+            
+            /* Additional CSS to hide the video container initially */
+            .video-container.hidden {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+<section class="ftco-section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6 text-center mb-5">
+                <h2 class="heading-section">LOGIN</h2>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-12 col-lg-10">
+                <div class="wrap d-md-flex">
+                    <div class="img" style="background-image: url(images/bg-1.png);"></div>
+                    <div class="login-wrap p-4 p-md-5">
+                        <form action="#" class="signin-form" id="contactForm">
+                            <div class="form-group mb-3">
+                                <label class="label" for="name">Email</label>
+                                <input type="email" id="email" class="form-control" placeholder="Email" required>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label class="label" for="password">Password</label>
+                                <input type="password" id="password" class="form-control" placeholder="Password"
+                                       required>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="form-control btn btn-primary rounded submit px-3">Login
+                                    In
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <br><br>
+                <div class="download-wrap">
+                    <h2 style="font-size:20px;">GET UPDATE OF NEW PRODUCTS</h2>
+                    <h5>Download Our App - ANDROID</h5>
+                    <a href="apk/STOCKWISECustomer.apk" class="btn-download">Download</a>
+                    <a onclick="toggleVideo()" class="btn-download" style="background-color: white; color: red;">How to download?</a>
+                    <div class="video-container hidden" id="videoContainer">
+                        <video controls autoplay>
+                            <source src="images/video.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        <span class="close-btn" onclick="toggleVideo()">&times;</span>
+                    </div>
+                    <h5>Visit Our Website - IPHONE</h5>
+                    <a href="https://stockwiseapp.netlify.app" class="btn-download">Visit</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script src="js/login.js"></script> <!-- Move the script tag here -->
+<script>
+    function toggleVideo() {
+        var videoContainer = document.getElementById("videoContainer");
+        videoContainer.classList.toggle("hidden");
+    }
+</script>
+
+</body>
+</html>
